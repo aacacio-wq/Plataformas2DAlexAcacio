@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]private LayerMask _groundLayer;
     [SerializeField]private Transform _groundSensor;
 
+    private InputAction _pauseAction;
+
     private Rigidbody2D _rigidbody2D;
     private InputAction _jumpAction;
     private InputAction _moveAction;
@@ -22,6 +24,7 @@ public class PlayerController : MonoBehaviour
 
         _moveAction = InputSystem.actions["Move"];
         _jumpAction = InputSystem.actions["Jump"];
+        _pauseAction = InputSystem.actions["Pause"];
     }
     
     void Start()
@@ -32,6 +35,18 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(_pauseAction.WasPressedThisFrame())
+        {
+            GameManager.Instance.Pause();
+        }
+
+        if(GameManager.Instance.IsPaused())
+        {
+            return;
+        }
+        
+        
+        
         _moveInput = _moveAction.ReadValue<Vector2>();
 
         if(_moveInput.x < 0)
@@ -48,6 +63,8 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
+
+        
     }
 
     void FixedUpdate()
