@@ -44,7 +44,8 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0;
         }
-    
+
+        CanvasManager.Instance.ChangeCanvasStatus();
     }
 
     public bool IsPaused()

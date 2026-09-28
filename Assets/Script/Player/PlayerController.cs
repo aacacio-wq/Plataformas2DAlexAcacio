@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]private int _maxHealth = 100;
+    [SerializeField]private int _actualHealth;
     [SerializeField]private float _movementSpeed = 4.5f;
     [SerializeField]private float _jumpHeight = 2;
     [SerializeField]private float _sensorSize = 1;
@@ -70,6 +71,17 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
          _rigidbody2D.linearVelocity = new Vector2(_moveInput.x * _movementSpeed, _rigidbody2D.linearVelocity.y);
+    }
+
+    public void AddHealth(int healAmaount)
+    {
+        _actualHealth += healAmaount;
+
+        if(_actualHealth > _maxHealth)
+        {
+            _actualHealth = _maxHealth;
+        }
+
     }
 
     void Jump()
