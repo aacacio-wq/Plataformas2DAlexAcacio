@@ -38,14 +38,16 @@ public class GameManager : MonoBehaviour
     {
         if(_isPaused)
         {
+            _isPaused = false;
             Time.timeScale = 1;
         }
         else
         {
+            _isPaused = true;
             Time.timeScale = 0;
         }
 
-        CanvasManager.Instance.ChangeCanvasStatus();
+        CanvasManager.Instance.ChangeCanvasStatus(CanvasManager.Instance.pauseCanvas, CanvasManager.Instance.resumeButton);
     }
 
     public bool IsPaused()
